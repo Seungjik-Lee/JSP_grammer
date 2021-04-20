@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="spro.com.org.SPRO_DBManager" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="spro.com.org.SPRO_DBManager"%>
+<%@ page import="spro.com.org.SPRO_MEMBER"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,25 +17,31 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="jumbotron">
+	<div class="jumbotron">
 		<h1>My StudyCafe</h1>
 		<p>공부하자</p>
 	</div>
-<%
-	String id = request.getParameter("id");
-	String pw = request.getParameter("pw");
-	out.println("id = "+id);
-	out.println("pw = "+pw);
-	out.println("안녕하세요 ");
-	
-	SPRO_DBManager sdbm = new SPRO_DBManager();
-	int ret = sdbm.ckLogin(id, pw);
-	if(ret == 0){
-		out.println("로그인 성공");
-	}
-	else {
-		out.println("로그인 실패");
-	}
-%>
+	<%
+		String id = request.getParameter("id");
+		String pw = request.getParameter("pw");
+		out.println("id = " + id);
+		out.println("pw = " + pw);
+		out.println("안녕하세요 ");
+
+		SPRO_DBManager sdbm = new SPRO_DBManager();
+		SPRO_MEMBER ret = sdbm.ckLogin(id,pw);
+		if (ret != null) {
+			out.println("로그인성공");
+
+			session.setAttribute("id", id);
+			session.setAttribute("pw", pw);
+			session.setAttribute("name", ret.getName());
+			session.setAttribute("phone", ret.getPhone());
+			out.println("세션에 저장 성공했음");
+			out.println("<a href='index.jsp class='btn btn-primary'>메인페이지</a>");
+		} else {
+			out.println("로그인실패");
+		}
+	%>
 </body>
 </html>
