@@ -16,6 +16,21 @@
 <link rel="stylesheet" href="/spro/css/mycss.css" />
 <script type="text/javascript">
 	$('document').ready(function(){
+		//css
+		/* 
+		1) #id명 -> id 선택자
+		2) .class명 -> class 선택자
+		3) tag명 -> tag 선택자
+		
+		ex)
+		$('#id명')
+		$('.class명')
+		$('h1')
+		<p><h1>제목</h><strong>진하게</strong><h2>h2h2</h2></p>
+		p > h1 {
+			
+		}
+		*/
 		$('button').on('click', function(obj){
 			$('button').attr('class', 'btn btn-primary w80');
 			//빨강으로 바꾸기
