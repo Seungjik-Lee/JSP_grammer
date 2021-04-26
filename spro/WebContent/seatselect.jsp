@@ -16,32 +16,22 @@
 <link rel="stylesheet" href="/spro/css/mycss.css" />
 <script type="text/javascript">
 	$('document').ready(function(){
-		//css
-		/* 
-		1) #id명 -> id 선택자
-		2) .class명 -> class 선택자
-		3) tag명 -> tag 선택자
-		
-		ex)
-		$('#id명')
-		$('.class명')
-		$('h1')
-		<p><h1>제목</h><strong>진하게</strong><h2>h2h2</h2></p>
-		p > h1 {
-			
-		}
-		*/
 		$('button').on('click', function(obj){
 			$('button').attr('class', 'btn btn-primary w80');
 			//빨강으로 바꾸기
 			$(this).attr('class', 'btn btn-danger w80');
-			// text() : 태그 사이에 글자만 가져오기
-			// html() : 태그 사이에 html 태그 포함해서 글자 가져오기
-			// val() input 태그에 있는 value 값 가져오기
 		});
 		$('#confirm').on('click', function(){
+			$('button').each(function(index,obj){
+				if($(this).attr('class') == 'btn btn-danger w80')
+					{
+//						console.log("$(this).attr('class') = " + $(this).attr('class'));
+//						console.log("$(this).text()) = " + $(this).text());
+						seat = $(this).text();
+					}
+			})
 			//좌석이 빨강인걸 찾아서 seatsave.jsp호출
-			location.href='seatsave.jsp';
+			location.href='seatsave.jsp?seat= ' + seat;
 		})
 	})
 </script>
