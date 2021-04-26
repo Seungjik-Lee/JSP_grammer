@@ -14,6 +14,22 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="/spro/css/mycss.css" />
+<script type="text/javascript">
+	$('document').ready(function(){
+		$('button').on('click', function(obj){
+			$('button').attr('class', 'btn btn-primary w80');
+			//빨강으로 바꾸기
+			$(this).attr('class', 'btn btn-danger w80');
+			// text() : 태그 사이에 글자만 가져오기
+			// html() : 태그 사이에 html 태그 포함해서 글자 가져오기
+			// val() input 태그에 있는 value 값 가져오기
+		});
+		$('#confirm').on('click', function(){
+			//좌석이 빨강인걸 찾아서 seatsave.jsp호출
+			location.href='seatsave.jsp';
+		})
+	})
+</script>
 </head>
 <body>
 	<div class="jumbotron">
@@ -119,10 +135,10 @@
 			<div class="col-sm-2"></div>
 			<div class="col-sm-2"></div>
 			<div class="col-sm-2">
-				<a id="cencel" class="btn btn-warning w80">취소</a>
+				<input type="button" id="cencel" class="btn btn-warning w80" value="취소"/>
 			</div>
 			<div class="col-sm-2">
-				<a id="confirm" class="btn btn-warning w80">확인</a>
+				<input type="button" id="confirm" class="btn btn-warning w80" value="확인"/>
 			</div>
 			<div class="col-sm-2"></div>
 			<div class="col-sm-2"></div>
