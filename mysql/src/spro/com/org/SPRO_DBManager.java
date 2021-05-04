@@ -21,8 +21,8 @@ public class SPRO_DBManager {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		try {
-			Class.forName(mysql_class);
-			conn = DriverManager.getConnection(mysql_url, mysql_id, mysql_pw);
+			Class.forName(DBinfo.mysql_class);
+			conn = DriverManager.getConnection(DBinfo.mysql_url, DBinfo.mysql_id, DBinfo.mysql_pw);
 			pstmt = conn.prepareStatement("select * from MEMBER " + "where ID=? and PW=? " + "");
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
