@@ -12,11 +12,10 @@ public class SPRO_DBManager {
 	String mysql_url = "jdbc:mysql://127.0.0.1:3306/spro?useUnicode=true&characterEncoding=UTF-8";
 	String mysql_id = "root";
 	String mysql_pw = "1234";
-	
 
 	public SPRO_MEMBER ckLogin(String id, String pw) {
 		SPRO_MEMBER member = null;
-		
+
 		Connection conn = null; // DB 연결객체
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -27,7 +26,7 @@ public class SPRO_DBManager {
 			pstmt.setString(1, id);
 			pstmt.setString(2, pw);
 			rs = pstmt.executeQuery();
-			
+
 			if (rs.next()) {
 				member = new SPRO_MEMBER();
 				member.setId(id);
@@ -51,94 +50,82 @@ public class SPRO_DBManager {
 		}
 		return member;
 	}
-	
+
 	public int signInsert(String id, String pw, String name, String phone) {
-		
+
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		try{
+		try {
 			// ojdbc jar 추가 확인
 			Class.forName(mysql_class);
 
-			conn = 
-			DriverManager.getConnection
-			(mysql_url, mysql_id, mysql_pw);
-			
+			conn = DriverManager.getConnection(mysql_url, mysql_id, mysql_pw);
+
 			// 블럭 지정 후 ctrl+ shift + x 대문자 지정
 			// 블럭 지정 후 ctrl+ shift + y 소문자 지정
-			pstmt = conn.prepareStatement(
-					"INSERT INTO "+ 
-					"MEMBER "+
-					"(ID, PW, NAME, PHONE) " +
-					"VALUES "+
-					"(?,?,?,?)");
-			
-			pstmt.setString(1,id);
-			pstmt.setString(2,pw);
-			pstmt.setString(3,name);
-			pstmt.setString(4,phone);
-			
+			pstmt = conn
+					.prepareStatement("INSERT INTO " + "MEMBER " + "(ID, PW, NAME, PHONE) " + "VALUES " + "(?,?,?,?)");
+
+			pstmt.setString(1, id);
+			pstmt.setString(2, pw);
+			pstmt.setString(3, name);
+			pstmt.setString(4, phone);
+
 			int ret = pstmt.executeUpdate();
-			if(ret > 0 ){
+			if (ret > 0) {
 				System.out.println("정상적으로 insert됨");
 				return ret;
 			}
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally{
-			try{
-				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
-			}catch(Exception ex){
-				
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception ex) {
+
 			}
 		}
 		return 0;
 	}
 
 	public int seat_useInsert(String seat, String name, String phone, String m_time) {
-		
+
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		try{
+		try {
 			// ojdbc jar 추가 확인
 			Class.forName(mysql_class);
 
-			conn = 
-			DriverManager.getConnection
-			(mysql_url, mysql_id, mysql_pw);
-			
+			conn = DriverManager.getConnection(mysql_url, mysql_id, mysql_pw);
+
 			// 블럭 지정 후 ctrl+ shift + x 대문자 지정
 			// 블럭 지정 후 ctrl+ shift + y 소문자 지정
 			pstmt = conn.prepareStatement(
-					"INSERT INTO "+ 
-					"SEAT_USE "+
-					"(NUM, NAME, PHONE, M_TIME) " +
-					"VALUES "+
-					"(?,?,?,?)");
-			
-			pstmt.setString(1,seat);
-			pstmt.setString(2,name);
-			pstmt.setString(3,phone);
-			pstmt.setString(4,m_time);
-			
+					"INSERT INTO " + "SEAT_USE " + "(NUM, NAME, PHONE, M_TIME) " + "VALUES " + "(?,?,?,?)");
+
+			pstmt.setString(1, seat);
+			pstmt.setString(2, name);
+			pstmt.setString(3, phone);
+			pstmt.setString(4, m_time);
+
 			int ret = pstmt.executeUpdate();
-			if(ret > 0 ){
+			if (ret > 0) {
 				System.out.println("정상적으로 insert됨");
 				return ret;
 			}
-		}
-		catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		finally{
-			try{
-				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
-			}catch(Exception ex){
-				
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception ex) {
+
 			}
 		}
 		return 0;
