@@ -168,4 +168,37 @@ public class SPRO_DaeGuManager {
 		}
 		return list;
 	}
+
+	public int pageCount() {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try{
+			Class.forName(DBinfo.mysql_class);
+			conn = DriverManager.getConnection(DBinfo.mysql_url, DBinfo.mysql_id, DBinfo.mysql_pw);
+			pstmt = conn.prepareStatement("SELECT COUNT(*) FROM DAEGU");
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				int rowcnt = rs.getInt(1);
+				System.out.println("rowcnt = "+rowcnt);
+				int pagecnt = rowcnt/10;
+				if(rowcnt%10>0)
+					pagecnt++;
+				System.out.println("현재 페이지 갯수 pagecnt = "+pagecnt);
+				return pagecnt;
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			try{
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}catch(Exception ex){
+				
+			}
+		}
+		return 0;
+	}
 }

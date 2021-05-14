@@ -6,6 +6,7 @@
 <%
 	SPRO_DaeGuManager sdbm = new SPRO_DaeGuManager();
 	List<SPRO_DaeGu> list = sdbm.select(0);
+	int pageCnt = sdbm.pageCount();
 /* 	for(SPRO_DaeGu sd : list){
 		System.out.println(sd.getIdx());
 		System.out.println(sd.getName());
@@ -69,6 +70,11 @@
 				<% } %>
 			</tbody>
 		</table>
+		<%
+			for(int i = 1; i<pageCnt; i++){
+				out.print(" <a href=\"?pageCnt="+i+"\">["+i+"]</a> ");
+			}
+		%>
 	</div>
 </body>
 </html>
